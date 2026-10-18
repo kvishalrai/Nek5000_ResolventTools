@@ -94,7 +94,9 @@ for iif =  iFreqsList
         psi=psi(:,order);
         dlmwrite(sprintf('gains_SS_%03.0f.dat',iif),[ones(nCurrIter,1)*freq,sig(:,:)])
 
-        mkdir('Resolvent');
+        % parallel Octave processes race here; in Octave >= 9 mkdir errors if the directory
+        % appeared in between, so only create it when missing and ignore that error
+        if ~exist('Resolvent','dir'); try; mkdir('Resolvent'); catch; end; end
         RespModes = xx*psi;
         ForcModes =  X*psi;
 

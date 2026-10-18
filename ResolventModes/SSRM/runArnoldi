@@ -90,6 +90,7 @@ done
 
 
 #Final octave run to compute gains
+mkdir -p Resolvent
 for j in $(seq 1  $nOctProcs); do 
    echo "Lauching octave processes: $j / $nOctProcs" 
    octave-cli -W --eval "reaFile='$reaFile';nOutputModes=-1;iProc=$j;nProc=$nOctProcs;Nek_Arnoldi;exit"  > logOrth_$j &
