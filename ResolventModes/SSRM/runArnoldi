@@ -51,9 +51,9 @@ for i in $(seq -f "%02.0f" $iStart $iEnd ); do
             echo 2 > params.input
             echo "$params" >> params.input
 
-	      ls ForceFiles/*Cos* | wc -l > harmCompList.txt
-	      ls ForceFiles/*Cos*  >> harmCompList.txt
-	      ls ForceFiles/*Sin*  >> harmCompList.txt
+	      ls ForceFiles/*Cos*0.f[0-9]* | wc -l > harmCompList.txt
+	      ls ForceFiles/*Cos*0.f[0-9]*  >> harmCompList.txt
+	      ls ForceFiles/*Sin*0.f[0-9]*  >> harmCompList.txt
 
       else
       	params=$(tail -n +2 params.input)
@@ -72,9 +72,10 @@ for i in $(seq -f "%02.0f" $iStart $iEnd ); do
 	mv {c,s}01* f{c,s}1* pertNorm.txt log_dir logOrth_* "IterAr$i/dir/"
 
   ##----------Adjoint run -----------------##
-  ls "IterAr$i/dir/"c01* | wc -l > harmCompList.txt
-  ls "IterAr$i/dir/"c01* >> harmCompList.txt
-  ls "IterAr$i/dir/"s01* >> harmCompList.txt
+  # field files only: Nek5000 v19 also writes VisIt metadata files (c01<case>.nek5000)
+  ls "IterAr$i/dir/"c01*0.f[0-9]* | wc -l > harmCompList.txt
+  ls "IterAr$i/dir/"c01*0.f[0-9]* >> harmCompList.txt
+  ls "IterAr$i/dir/"s01*0.f[0-9]* >> harmCompList.txt
 
   echo 1 > params.input
 	echo "$params" >> params.input
