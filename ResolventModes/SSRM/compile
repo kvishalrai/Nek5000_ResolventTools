@@ -1,6 +1,7 @@
 #!/bin/bash
 
-NEK5000_ResTools_PATH='${HOME}/Nek5000_ResolventTools'
+# location of this repository (override with the environment variable of the same name)
+: "${NEK5000_ResTools_PATH:=$HOME/Nek5000_ResolventTools}"
 
 export FFLAGS+=" -I ${NEK5000_ResTools_PATH}/Libs/FFT "
 export FFLAGS+=" -I ${NEK5000_ResTools_PATH}/Libs/FLD2Force "
